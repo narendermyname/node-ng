@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery UI Tabs - Open on mouseover</title>
+      <link rel="stylesheet" type="text/css" href="/assets/styles/salesforce-lightning-design-system.css">
+
+  <link rel="stylesheet" href="/css/jquery-ui.css">
+  <script src="/js/jquery-1.10.2.js"></script>
+  <script src="/js/jquery-ui.js"></script>
+  <script>
+  $(function() {
+    $( "#tabs" ).tabs({
+      event: "mouseover"
+    });
+  });
+  </script>
+<script>
+         $(function() {
+            $( "#selectable-7" ).selectable({
+               selected: function() {
+                  var result = $( "#selectedData" )//empty();
+                  $( ".ui-selected", this ).each(function() {
+                     var id = 'selected'+$(this).index();
+                     var element = $(id);
+                     //remove selection
+                     if( $(this).hasClass('abcc'))  { 
+    					//console.debug('do nothing  ');
+    					//var elId = '#'+id;
+    					//$( elId).remove()
+					 }else{
+					 	// addd selection
+                     	var $this = $(this);
+                     	console.log('id: '+id);
+                     	var html = ' <span id = "'+id+'" class="slds-pill">'+$this.text()+' <span style="cursor:pointer" onclick = "removeFilter('+id+')"><b>&#10008;</b></span></span>';
+                     	result.append(html);
+                     	$( this ).toggleClass("abcc");
+                     	$( this ).addClass(id);
+                     	$(this).prepend('<span id = "check'+id+'">&#10004 </span>');
+					} 
+                    //
+                  });
+               }
+            });
+	$("#lookup").keyup(function(){
+	if($("input").val() == ""){
+		$(".slds-lookup__menu").css("display","none");
+        
+    }else{
+    	var str = '<div class="slds-lookup__item "><button class="slds-button">'
+    	+'<svg aria-hidden="true" class="slds-icon slds-icon-text-default slds-icon--small">'+
+    	'<use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#user"></use>'+
+        '</svg>&quot;'+$("input").val()+'&quot; in Accounts</button></div>'
+    	$("#appendItems").html(str);
+    	$(".slds-lookup__menu").css("display","block");
+        
+    }
+    });
+    
+    
+         });
+	function removeFilter(id){
+		console.log(id);
+		var elementId = $(id).attr('id');
+		var checkId = "#check"+elementId
+		$(id).remove()
+		$(checkId).remove();
+		$('.'+elementId).removeClass('abcc');
+		$('.'+elementId).removeClass(elementId);
+		
+	}        
+</script>
+
+<style>
+         #selectable-7 .ui-selecting {/* background: #707070 ;*/}
+         #selectable-7 .ui-selected { /*background: #EEEEEE; color: #000000;*/}
+         #selectable-7 { list-style-type: none; margin: 0; 
+            padding: 0; width: 20%; }
+         #selectable-7 li {
+            font-size: 16px;}
+         .ui-widget-content {
+            /*background: #cedc98;
+            border: 1px solid #DDDDDD;
+            color: #333333;*/
+		border: none;
+         }
+         .resultarea {
+            background: #cedc98;
+            border-top: 1px solid #000000;
+            border-bottom: 1px solid #000000;
+            color: #333333;
+            font-size:14px;
+         }
+         .ui-widget-header{
+         	background:none;
+         	border:none;
+         }
+         .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active{
+          	background:none;
+          	border:none;
+         }
+         .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{
+         	background:none;
+          	border:none;
+         }
+.cc{
+background: #cedc98;
+}
+#selectedData{
+margin-top:10px;
+}
+      </style>
+</head>
+<body>
+<div class = "slds-pill-container">
+<div class="slds-lookup " data-select="multi" data-scope="single" data-typeahead="true" style = "width:30% ;margin:5px">
+  <div class="slds-form-element">
+    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon--left">
+      <svg aria-hidden="true" class="slds-input__icon">
+        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#search"></use>
+      </svg>
+      <input id="lookup" class="slds-input" type="text" aria-autocomplete="list" role="combobox" aria-expanded="true" aria-activedescendant="" />
+      
+    </div>
+  </div>
+  <div class="slds-lookup__menu" role="listbox" style = "display:none">
+    <span id = "appendItems"></span>
+  </div>
+</div>
+<div id="tabs" style = " margin: -57px 4px 0 31%; width: 70%;">
+  <ul>
+  	<li><a href="#tabs-1">REFERENCEABILITY</a></li>
+  	<li><a href="#tabs-2">GEOGRAPHY</a></li>
+  	<li><a href="#tabs-3">INDUSTRY</a></li>
+  	<!--<li><a href="#tabs-4">SOLUTION</a></li>
+  	<li><a href="#tabs-5">CONTENT LANGUAGE</a></li>
+  	<li><a href="#tabs-6">CONTENT TYPE</a></li>-->
+    <li><a href="#tabs-7">PRODUCT</a></li>
+    <!--<li><a href="">MORE <span id = 'moreItems'>&#9662;</span></a></li>-->
+  </ul>
+  <div id="tabs-1">
+  <ol id="selectable-7">
+         <li class="ui-widget-content">REFERENCEABILITY 1</li>
+         <li class="ui-widget-content">REFERENCEABILITY 2</li>
+         <li class="ui-widget-content">REFERENCEABILITY 3</li>
+         <li class="ui-widget-content">REFERENCEABILITY 4</li>
+         <li class="ui-widget-content">REFERENCEABILITY 5</li>
+         <li class="ui-widget-content">REFERENCEABILITY 6</li>
+         <li class="ui-widget-content">REFERENCEABILITY 7</li>
+      </ol>
+  </div>
+   <div id="tabs-2">
+  <ol id="selectable-7">
+         <li class="ui-widget-content">GEOGRAPHY 1</li>
+         <li class="ui-widget-content">GEOGRAPHY 2</li>
+         <li class="ui-widget-content">GEOGRAPHY 3</li>
+         <li class="ui-widget-content">GEOGRAPHY 4</li>
+         <li class="ui-widget-content">GEOGRAPHY 5</li>
+         <li class="ui-widget-content">GEOGRAPHY 6</li>
+         <li class="ui-widget-content">GEOGRAPHY 7</li>
+      </ol>
+  </div>
+   <div id="tabs-3">
+  <ol id="selectable-7">
+         <li class="ui-widget-content">INDUSTRY 1</li>
+         <li class="ui-widget-content">INDUSTRY 2</li>
+      </ol>
+  </div>
+<!-- <div id="tabs-4">
+  <ol id="selectable-7">
+         <li class="ui-widget-content">SOLUTION 1</li>
+         <li class="ui-widget-content">SOLUTION 2</li>
+ </ol>
+  </div>
+   <div id="tabs-5">
+  <ol id="selectable-7">
+         <li class="ui-widget-content">CONTENT LANGUAGE 1</li>
+         <li class="ui-widget-content">CONTENT LANGUAGE 2</li>
+</ol>
+  </div>
+  <div id="tabs-6">
+  <ol id="selectable-7">
+         <li class="ui-widget-content">CONTENT TYPE</li>
+      </ol>
+  </div>-->
+  <div id="tabs-7" class ="dropBorder">
+      <ol id="selectable-7">
+         <li class="ui-widget-content">Product 1</li>
+         <li class="ui-widget-content">Product 2</li>
+         <li class="ui-widget-content">Product 3</li>
+         <li class="ui-widget-content">Product 4</li>
+         <li class="ui-widget-content">Product 5</li>
+         <li class="ui-widget-content">Product 6</li>
+         <li class="ui-widget-content">Product 7</li>
+      </ol>
+  </div>
+ 
+</div>
+</div>
+<div id = 'selectedData' class = 'slds-pill-container'>
+</div>
+</body>
+</html>

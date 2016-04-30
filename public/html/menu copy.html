@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SLDS & Bootstrap</title>
+</head>
+<body>
+<div class = "slds-pill-container">
+<div class="slds-lookup " data-select="multi" data-scope="single" data-typeahead="true" style = "width:30% ;margin:5px">
+  <div class="slds-form-element">
+    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon--left">
+      <svg aria-hidden="true" class="slds-input__icon">
+        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#search"></use>
+      </svg>
+      <input id="lookup" class="slds-input" type="text" aria-autocomplete="list" role="combobox" aria-expanded="true" aria-activedescendant="" />
+      
+    </div>
+  </div>
+  <div class="slds-lookup__menu" role="listbox" style = "display:none">
+    <span id = "appendItems"></span>
+  </div>
+</div>
+<!-- Nav pills -->
+<ul class="nav nav-pills" style="margin: -52px 0 10px 32%;">
+  <li class="active"><a href="#tab-1" data-toggle="tab">Tab 1</a></li>
+  <li><a href="#tab-2" data-toggle="tab">Tab 2</a></li>
+  <li><a href="#tab-3" data-toggle="tab">Tab 3</a></li>
+  <li><a href="#tab-4" data-toggle="tab">Tab 4</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content well">
+  <div class="tab-pane active" id="tab-1">Content 1</div>
+  <div class="tab-pane" id="tab-2">Content 2</div>
+  <div class="tab-pane" id="tab-3">Content 3</div>
+  <div class="tab-pane" id="tab-4">Content 4</div>
+</div>
+</div>
+<div id = 'selectedData' class = 'slds-pill-container'>
+
+
+
+<!--
+<ul class="nav nav-pills">
+  <li class="dropdown">
+    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown <b class="caret"></b></a>
+    <ul class="dropdown-menu" id="menu1" style = "width:1000%">
+      <li>
+        <a href="#">2-level Menu <i class="icon-arrow-right"></i></a>
+        <ul class="dropdown-menu sub-menu">
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Another action</a></li>
+          <li><a href="#">Something else here</a></li>
+          <li class="divider"></li>
+          <li class="nav-header">Nav header</li>
+          <li><a href="#">Separated link</a></li>
+          <li><a href="#">One more separated link</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Another action</a></li>
+      <li><a href="#">Something else here</a></li>
+      <li class="divider"></li>
+      <li><a href="#">Separated link</a></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a href="#">Menu</a>
+  </li>
+  <li class="dropdown">
+    <a href="#">Menu</a>
+  </li>
+</ul>-->
+
+<link href="/css/bootstrap-combined.min.css" rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" href="/assets/styles/salesforce-lightning-design-system.css">
+<script src="/js/jquery-1.10.2.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<style>
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+.sidebar-nav {
+  padding: 9px 0;
+}
+
+.dropdown-menu .sub-menu {
+  left: 100%;
+  position: absolute;
+  top: 0;
+  visibility: hidden;
+  margin-top: -1px;
+}
+
+.dropdown-menu li:hover .sub-menu {
+  visibility: visible;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.nav-tabs .dropdown-menu,
+.nav-pills .dropdown-menu,
+.navbar .dropdown-menu {
+  margin-top: 0;
+}
+
+.navbar .sub-menu:before {
+  border-bottom: 7px solid transparent;
+  border-left: none;
+  border-right: 7px solid rgba(0, 0, 0, 0.2);
+  border-top: 7px solid transparent;
+  left: -7px;
+  top: 10px;
+}
+
+.navbar .sub-menu:after {
+  border-top: 6px solid transparent;
+  border-left: none;
+  border-right: 6px solid #fff;
+  border-bottom: 6px solid transparent;
+  left: 10px;
+  top: 11px;
+  left: -6px;
+}
+
+.nav > li > a:hover, .nav > li > a:focus{
+	background-color:none !important;
+	border-bottom:6px solid darkgray;
+	
+}
+.nav-pills > li > a{
+	border-radius:0px !important;
+}
+
+body { 
+padding: 2rem; 
+}
+.tab-content { 
+margin-top: 1.5rem; 
+}
+.nav-pills > .active > a, .nav-pills > .active > a:hover, .nav-pills > .active > a:focus{
+	background-color: none !important;
+    color: none !important;
+}
+.nav-pills > .active > a, .nav-pills > .active > a:hover, .nav-pills > .active > a:focus{
+
+}
+.nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover{
+    /*border-bottom: 4px solid #0088cc;*/
+}
+         .resultarea {
+            background: #cedc98;
+            border-top: 1px solid #000000;
+            border-bottom: 1px solid #000000;
+            color: #333333;
+            font-size:14px;
+         }
+         .ui-widget-header{
+         	background:none;
+         	border:none;
+         }
+#selectedData{
+margin-top:10px;
+}
+</style>
+
+<script>
+$(document).on('mouseenter', '[data-toggle="tab"]', function () {
+  $(this).tab('show');
+  $('.tab-content').show();
+});
+$(document).on('click', '[data-toggle="tab"]', function () {
+  //$(this).tab('hide');
+  //alert('Hide me');
+  $('.tab-content').hide();
+});
+$(document).off('click.bs.tab.data-api', '[data-hover="tab"]');
+    $(document).on('mouseenter.bs.tab.data-api', '[data-toggle="tab"], [data-hover="tab"]', function () {
+      $(this).tab('show');
+    });
+$(function(){
+$('.tab-content').hide();
+$('.tab-pane').click(function() {
+                  var result = $( "#selectedData" )//empty();
+                  //$( ".tab-pane", this ).each(function() {
+                     var id = 'selected'+$(this).index();
+                     var element = $(id);
+                     //remove selection
+                     if( $(this).hasClass('abcc'))  { 
+    					//console.debug('do nothing  ');
+    					//var elId = '#'+id;
+    					//$( elId).remove()
+					 }else{
+					 	// addd selection
+                     	var $this = $(this);
+                     	console.log('id: '+id);
+                     	var html = ' <span id = "'+id+'" class="slds-pill">'+$this.text()+' <span style="cursor:pointer" onclick = "removeFilter('+id+')"><b>&#10008;</b></span></span>';
+                     	result.append(html);
+                     	$( this ).toggleClass("abcc");
+                     	$( this ).addClass(id);
+                     	$(this).prepend('<span id = "check'+id+'">&#10004 </span>');
+					} 
+                    //
+                  //});
+     });         
+	$("#lookup").keyup(function(){
+	if($("input").val() == ""){
+		$(".slds-lookup__menu").css("display","none");
+        
+    }else{
+    	var str = '<div class="slds-lookup__item "><button class="slds-button">'
+    	+'<svg aria-hidden="true" class="slds-icon slds-icon-text-default slds-icon--small">'+
+    	'<use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#user"></use>'+
+        '</svg>&quot;'+$("input").val()+'&quot; in Refences</button></div>'
+    	$("#appendItems").html(str);
+    	$(".slds-lookup__menu").css("display","block");
+        
+    }
+    });
+});
+function removeFilter(id){
+		console.log(id);
+		var elementId = $(id).attr('id');
+		var checkId = "#check"+elementId
+		$(id).remove()
+		$(checkId).remove();
+		$('.'+elementId).removeClass('abcc');
+		$('.'+elementId).removeClass(elementId);
+		
+} 
+</script>
+</body>
+</html>
+
+
+
+

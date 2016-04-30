@@ -1,0 +1,139 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../css/jquery.dataTables.css">
+</head>
+<body>
+  <table id="example">
+    <thead>
+      <tr><th>Sites</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>SitePoint</td></tr>
+      <tr><td>Learnable</td></tr>
+      <tr><td>Flippa</td></tr>
+	  <tr><td>Flippa2</td></tr>
+	  <tr><td>Flippa3</td></tr>
+	  <tr><td>Flippa4</td></tr>
+	  <tr><td>Flippa5</td></tr>
+    </tbody>
+  </table>
+  <table id="example2">
+  <thead>
+    <tr><th class="site_name">Name</th><th>Url </th><th>Type</th><th>Last modified</th></tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+<table id="example3" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Extn.</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Extn.</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+        </tfoot>
+    </table>
+  <script type="text/javascript" charset="utf8" src="../js/jquery-2.2.0.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="../js/jquery.dataTables.min.js"></script>
+  <script>
+  $(function(){
+    $("#example").dataTable();
+  })
+  $("#example2").dataTable({
+  "aaData":[
+    ["Sitepoint","http://sitepoint.com","Blog","2013-10-15 10:30:00"],
+    ["Flippa","http://flippa.com","Marketplace","null"],
+    ["99designs","http://99designs.com","Marketplace","null"],
+    ["Learnable","http://learnable.com","Online courses","null"],
+    ["Rubysource","http://rubysource.com","Blog","2013-01-10 12:00:00"]
+  ],
+  "aoColumnDefs":[{
+        "sTitle":"Site name"
+      , "aTargets": [ "site_name" ]
+  },{
+        "aTargets": [ 1 ]
+      , "bSortable": false
+      , "mRender": function ( url, type, full )  {
+          return  '<a href="'+url+'">' + url + '</a>';
+      }
+  },{
+        "aTargets":[ 3 ]
+      , "sType": "date"
+      , "mRender": function(date, type, full) {
+          return (full[2] == "Blog") 
+                    ? new Date(date).toDateString()
+                    : "N/A" ;
+      }  
+  }]
+});
+
+var editor; // use a global for the submit and return data rendering in the examples
+ 
+$(document).ready(function() {
+    editor = new $.fn.dataTable.Editor( {
+        ajax: "http://localhost:9001/datatable/input.json",
+        table: "#example3",
+        fields: [ {
+                label: "First name:",
+                name: "first_name"
+            }, {
+                label: "Last name:",
+                name: "last_name", type: 'textarea'
+            }, {
+                label: "Position:",
+                name: "position"
+            }, {
+                label: "Office:",
+                name: "office"
+            }, {
+                label: "Extension:",
+                name: "extn"
+            }, {
+                label: "Start date:",
+                name: "start_date",
+                type: "datetime"
+            }, {
+                label: "Salary:",
+                name: "salary"
+            }
+        ]
+    } );
+ 
+    $('#example3').DataTable( {
+        dom: "Bfrtip",
+        ajax: "../php/staff.php",
+        columns: [
+            { data: null, render: function ( data, type, row ) {
+                // Combine the first and last names into a single table field
+                return data.first_name+' '+data.last_name;
+            } },
+            { data: "position" },
+            { data: "office" },
+            { data: "extn" },
+            { data: "start_date" },
+            { data: "salary", render: $.fn.dataTable.render.number( ',', '.', 0, '$' ) }
+        ],
+        select: true,
+        buttons: [
+            { extend: "create", editor: editor },
+            { extend: "edit",   editor: editor },
+            { extend: "remove", editor: editor }
+        ]
+    } );
+} );
+  </script>
+</body>
+</html>

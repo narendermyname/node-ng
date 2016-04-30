@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <title>NG-Data Service Example</title>
+</head>
+<body >
+    <div ng-app="app" ng-controller="DataController as ctrl" ng-cloak>
+        <ul style="padding-left:0; list-style:none;">
+            <li ng-repeat="person in ctrl.persons">
+                {{person.id}} - {{person.name}} - {{person.birthdate}}
+            </li>
+        </ul>
+
+        <div style="margin-bottom:15px;" ng-show="ctrl.loading">Loading ...</div>
+        <div style="color:red; margin-bottom:15px;" ng-show="ctrl.message">{{ctrl.message}}</div>
+
+        <form name="form" novalidate>
+            <button ng-click="ctrl.getPersons()">GET /persons</button>
+            <p></p>
+            <button ng-click="ctrl.getPerson(ctrl.personId)">GET /person/:id</button>
+            <input ng-model="ctrl.personId" name="id4get" required placeholder="id" />
+            <p></p>
+            <button ng-click="ctrl.addPerson(ctrl.person)">POST /person</button>
+            <input ng-model="ctrl.person.name" name="name" required placeholder="name" />
+            <input ng-model="ctrl.person.birthdate" name="birthdate" required placeholder="birthdate" />
+            <p></p>
+            <button ng-click="ctrl.removePerson(ctrl.personId)">DELETE /person/:id</button>
+            <input ng-model="ctrl.personId" name="id4delete" required placeholder="id" />
+        </form>
+    </div>
+    <div ng-app="myapp" ng-controller = "HelloController" >
+   		<h2>Welcome {{helloTo.title}} to the world of Tutorialspoint!</h2>
+	</div>
+	<script src="../js/ng/angular.js"></script>
+    <script src="../js/ng/angular-mocks.js"></script>
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+    <script src="DataService.js"></script>
+    <script src="DataController.js"></script>
+    <script>
+    	angular.module("myapp", [])
+   
+   .controller("HelloController", function($scope) {
+      $scope.helloTo = {};
+      $scope.helloTo.title = "AngularJS";
+   });
+    </script>
+</body>
+</html>

@@ -1,0 +1,337 @@
+<div class="container">
+  <div class="radio-wrapper" style = "background:green">
+    <p class="correct"><i class="ion-checkmark-round"></i>
+    </p>
+    <p class="neutral-icon"><i class="ion-record"></i>
+    </p>
+    <p class="wrong"><i class="ion-close-round"></i></p>
+    <input type="radio" name="event" class="yes" id="radio-yes" />
+
+    <label id ="yesLabel" class = "neutralYesLabel" for="radio-yes"></label>
+
+    <input type="radio" name="event" class="neutral" checked id="radio-neutral" />
+    <label id ="neutralLabel" for="radio-neutral"></label>
+
+
+    <input type="radio" name="event" class="no" id="radio-no" />
+    <label id ="noLabel" class = "neutralNoLabel" for="radio-no"></label>
+  </div>
+</div>
+
+<p id = "result">Result
+</p>
+<div id="greenCircle" class="circle"></div>
+<div id="redCircle" class= "circle"></div>
+<style>
+*{
+  box-sizing: border-box;
+}
+
+h1 {
+  color: white;
+  font-size: 2em;
+  text-align: center;
+  font-family: 'Indie Flower', cursive;
+}
+
+.radio-wrapper {
+  width: 40px;
+  height: 15px;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 30px;
+  position: relative;
+  margin-left: 1%;
+}
+
+.radio-wrapper p {
+  position: absolute;
+  z-index: 10;
+  color: white;
+  font-size: 1.7em;
+  margin: 0;
+  margin-top: 13px;
+}
+
+.radio-wrapper .correct {
+  left: 17px;
+  top: -5px;
+}
+
+.radio-wrapper .wrong {
+  right: 17px;
+  top: -5px;
+}
+
+.radio-wrapper .neutral-icon {
+  left: 69px;
+  top: -8px;
+  opacity: .5;
+}
+
+.radio-wrapper label {
+  z-index: 9;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+i {
+  z-index: 99;
+  font-size: 18px;
+}
+
+.neutral-icon i {
+  font-size: 10px;
+}
+
+.neutral + label {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  position: absolute;
+  left: 33%;
+  -webkit-transition: -webkit-transform 1s;
+  transition: -webkit-transform 1s;
+  transition: transform 1s;
+  transition: transform 1s, -webkit-transform 1s;
+}
+
+.neutral:checked + label {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: white;
+  //border: 2px solid black;
+}
+
+.yes + label {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  text-align: center;
+}
+
+.yes:checked + label {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: white;
+}
+
+.no + label {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  position: absolute;
+  right: 0;
+  text-align: center;
+}
+
+.no:checked + label {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: white;
+  -moz-animation-duration: 0.4s;
+  -moz-animation-name: slideno;
+  -webkit-animation-duration: 0.4s;
+  -webkit-animation-name: slideno;
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  -webkit-animation-name: slideno;
+  animation-name: slideno;
+  -webkit-transform: translateZ(0);
+}
+
+@-webkit-keyframes slidein {
+  from {
+    -webkit-transform: translate(50px, 0);
+    transform: translate(50px, 0);
+  }
+  to {
+    -webkit-transform: translate(0px, 0px);
+    transform: translate(0px, 0px);
+  }
+}
+
+@keyframes slidein {
+  from {
+    -webkit-transform: translate(50px, 0);
+    transform: translate(50px, 0);
+  }
+  to {
+    -webkit-transform: translate(0px, 0px);
+    transform: translate(0px, 0px);
+  }
+}
+
+@-webkit-keyframes slideno {
+  from {
+    -webkit-transform: translate(-50px, 0);
+    transform: translate(-50px, 0);
+  }
+  to {
+    -webkit-transform: translate(0px, 0px);
+    transform: translate(0px, 0px);
+  }
+}
+
+@keyframes slideno {
+  from {
+    -webkit-transform: translate(-50px, 0);
+    transform: translate(-50px, 0);
+  }
+  to {
+    -webkit-transform: translate(0px, 0px);
+    transform: translate(0px, 0px);
+  }
+}
+
+@-webkit-keyframes returnLeft {
+  from {
+    -webkit-transform: translate(-50px, 0);
+    transform: translate(-50px, 0);
+  }
+  to {
+    -webkit-transform: translate(0px, 0);
+    transform: translate(0px, 0);
+  }
+}
+
+@keyframes returnLeft {
+  from {
+    -webkit-transform: translate(-50px, 0);
+    transform: translate(-50px, 0);
+  }
+  to {
+    -webkit-transform: translate(0px, 0);
+    transform: translate(0px, 0);
+  }
+}
+
+@-webkit-keyframes returnRight {
+  from {
+    -webkit-transform: translate(50px, 0);
+    transform: translate(50px, 0);
+  }
+  to {
+    -webkit-transform: translate(0px, 0);
+    transform: translate(0px, 0);
+  }
+}
+
+@keyframes returnRight {
+  from {
+    -webkit-transform: translate(50px, 0);
+    transform: translate(50px, 0);
+  }
+  to {
+    -webkit-transform: translate(0px, 0);
+    transform: translate(0px, 0);
+  }
+}
+.neutral_yes{
+	border-radius: 50% 0 0 50%;
+	background:red;
+}
+.neutralYesLabel{
+	border-radius: 50% 0 0 50% !important;
+	background:red;
+}
+.neutralNoLabel{
+	border-radius: 0 50% 50% 0 !important;
+	background:green;
+	width: 11px !important;
+	
+}
+.neuralNoBG{
+	background :white !important;
+}
+#greenCircle{
+	background:green;
+}
+#redCircle{
+	background:red;
+	
+}
+.circle{
+	border-radius: 50%;
+	width: 11px;
+  	height: 11px;
+}
+</style>
+<script  src = "js/jquery-2.2.0.min.js" ></script>
+<script>
+$(function() {
+  $("input[type=radio][name=event]").click(function() {
+    var value = $(this).attr("id");
+    $("#result").html(value);
+    if (value == 'radio-yes') {
+    	removeClass();
+    	$(".radio-wrapper").css("background", 'green');
+    } else if (value == 'radio-neutral') {
+    	addNeutralClass();
+    } else if (value == 'radio-no') {
+    	removeClass();
+    	$(".radio-wrapper").css("background", 'red');
+    }
+  });
+
+});
+function removeClass(){
+	$("#yesLabel").removeClass("neutralYesLabel");
+    $("#noLabel").removeClass("neutralNoLabel");
+}
+
+function addNeutralClass(){
+	$(".radio-wrapper").css("background", 'green');
+	$("#yesLabel").addClass("neutralYesLabel");
+    $("#noLabel").addClass("neutralNoLabel");
+}
+
+</script>
+
+
+jQuery(window).load(function() {
+// added for sahrable switch R14.87
+            jQuery("input[type=radio][name=event]").click(function() {
+    			var value = jQuery(this).attr("id");
+    			var search = null;
+			    PORShowLoading();
+			    console.log('Start content search');
+			    if (value == 'radio-yes') {
+			    	removeClass();
+			        jQuery(".radio-wrapper").css("background", 'red');
+			        search = false;
+			    } else if (value == 'radio-neutral') {
+			        addNeutralClass();
+			    	search = null;
+			    } else if (value == 'radio-no') {
+			      removeClass();
+			      jQuery(".radio-wrapper").css("background", 'green');
+			      search = true;
+		    	}
+		    	searchRfContents(search);
+  			});
+        });
+        // added for sahrable switch R14.87
+        function removeClass(){
+			jQuery("#yesLabel").removeClass("neutralYesLabel");
+		    jQuery("#noLabel").removeClass("neutralNoLabel");
+		}
+		
+		function addNeutralClass(){
+            jQuery(".radio-wrapper").css("background", 'green');
+			jQuery("#yesLabel").addClass("neutralYesLabel");
+		    jQuery("#noLabel").addClass("neutralNoLabel");
+		}

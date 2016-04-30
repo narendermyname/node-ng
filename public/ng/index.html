@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <title>NG-Data</title>
+</head>
+<body >
+    <div ng-app="myapp" ng-controller = "HelloController" >
+    	Name : <input type = "name" ng-model ="helloTo.title"/>
+   		<h2>Welcome {{helloTo.title}} to the world of Tutorialspoint!</h2>
+   		</br>
+   		Search : <input type = "text" ng-model = "search"/> 
+   		<table border = "2">
+			<tr>
+				<th><a href="#" ng-click = "headerSort('name')">Name</a></th>
+				<th><a href="#" ng-click = "headerSort('price')">Price</a></th>
+				<th><a href="#" ng-click = "headerSort('desc')">Description</a></th>
+			</tr>
+			<tr ng-repeat = "item in items | filter : search | orderBy : sort">
+				<td>{{item.name}}</td>
+				<td>{{item.price}}</td>
+				<td>{{item.desc}}</td>
+			<tr/>
+		</table>
+		<input type="text" ng-model="directivename" placeholder="name" /></br>
+		Difference format of use directive
+			<span ng-bind="directivename"></span>
+			<span ng:bind="directivename"></span>
+			<span ng_bind="directivename"></span>
+			<span x-ng-bind="directivename"></span>
+			<span data-ng-bind="directivename"></span></br>
+			Custom directive
+			<div ng-Sparkline></div>
+			<div class='ng-Sparkline'></div>
+			<ng-Sparkline></ng-Sparkline>
+			
+			<student name = "Mahesh"></student><br/>
+         	<student name = "Piyush"></student>
+         	Add a watch on title
+         	<div>{{change}}</div></br>
+         	Services
+         	<button ng-click="call()">call</button>
+         	<button ng-click="reply()">reply</button>
+	</div>
+		
+	<script src="../js/ng/angular.js"></script>
+    <script>
+    	var app = angular.module("myapp", []);
+   
+   app.controller("HelloController", function($scope,myService,helloService) {
+      $scope.helloTo = {};
+      $scope.helloTo.title = "AngularJS";
+      $scope.sort = 'name';
+      $scope.headerSort = function (filter){
+      	$scope.sort = filter;
+      }
+      $scope.call = function(){
+      	myService.call();
+      	helloService.hello();
+      }
+      $scope.reply = function(){
+      	myService.reply();
+      }
+      $scope.change = '';
+      $scope.$watch('helloTo.title',function(){
+      	 $scope.change = "Change in title = "+$scope.helloTo.title;
+      })
+      $scope.items = [{name:'Boost',price:'12',desc:"Energy Drink"},
+      {name:'Hajmola',price:'24',desc:"Eadable"},
+      {name:'Rajma',price:'1',desc:'BVEG'},
+      {name:'Boost2',price:'13',desc:'Energy Drink'},
+      {name:'Boost3',price:'14',desc:'Energy Drink'},
+      {name:'Boost4',price:'15',desc:'Energy Drink'}]
+      $scope.student = [{name:"Narender",rollno:123},{name:"Nisha",rollno:321}];
+      $scope.Mahesh = {};
+            $scope.Mahesh.name = "Mahesh Parashar";
+            $scope.Mahesh.rollno  = 1;
+
+            $scope.Piyush = {};
+            $scope.Piyush.name = "Piyush Parashar";
+            $scope.Piyush.rollno  = 2;
+   });
+   app.directive("ngSparkline",function(){
+   return {
+   	restrict : 'AEC',
+   	templete : '<div class = "sparkline" ></div>',
+   	compile : function(element, attributes){
+   		var linking = function($scope, element, attributes){
+   			element.html("Name: <b>"+$scope.student[0].name +"</b> , Id: <b>"+$scope.helloTo.title+"</b><br/>");
+   			element.css("background-color", "green");
+   			element.bind("click",function(){
+   				alert("Don't Click!");
+   			});
+   		}
+   		return linking;
+   	}
+   }
+   });
+   //Student directive
+   app.directive('student',function(){
+   	var directive = {};
+   	directive.restrict = 'E';
+   	
+   	directive.templete = "Student: <b>{{student.name}}</b> , Roll No: <b>{{student.rollno}}</b>";
+   	directive.scope = {
+   		student:"=name"
+   	}
+   	directive.compile = function(element, attributes) {
+      element.css("border", "1px solid #cccccc");
+      
+      //linkFunction is linked with each element with scope to get the element specific data.
+      var linkFunction = function($scope, element, attributes) {
+         element.html("Student: <b>"+$scope.student.name +"</b> , Roll No: <b>"+$scope.student.rollno+"</b><br/>");
+         element.css("background-color", "#ff00ff");
+      }
+      return linkFunction;
+   	}
+   	return directive;
+   });
+   app.factory('myService',function(){
+   	var callServ = function(){
+   		alert('factory call service');
+   	}
+   	var replyServ = function(){
+   		alert('factory reply service');
+   	}
+   	return {call:callServ,reply:replyServ};
+   });
+   //always use this 
+   app.service('helloService', function () {
+  	this.hello = function () {
+    	console.log('hello service');
+    	alert('hello service');
+  	};
+	});
+   //http://jsfiddle.net/SAWsA/11/   &&&   http://plnkr.co/edit/6PFCPuFrN6lfGHjHVwGf?p=preview
+    </script>
+    <style>
+    .sparkline{
+     border:2;
+     background:green;
+    }
+    </style>
+</body>
+</html>

@@ -1,0 +1,123 @@
+#selectable-7 .ui-selecting {/* background: #707070 ;*/}
+#selectable-7 .ui-selected { /*background: #EEEEEE; color: #000000;*/}
+#selectable-7 { 
+	list-style-type: none; margin: 0; 
+    padding: 0; width: 20%; 
+}
+#selectable-7 li {
+            font-size: 16px;}
+.ui-widget-content {
+            /*background: #cedc98;
+            border: 1px solid #DDDDDD;
+            color: #333333;*/
+	border: none;
+}
+.resultarea {
+            background: #cedc98;
+            border-top: 1px solid #000000;
+            border-bottom: 1px solid #000000;
+            color: #333333;
+            font-size:14px;
+         }
+.ui-widget-header{
+         	background:none;
+         	border:none;
+         }
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active{
+          	background:none;
+          	border:none;
+         }
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{
+         	background:none;
+          	border:none;
+         }
+.cc{
+background: #cedc98;
+}
+
+.tabs-7{
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+    padding: 20px; 
+    width: 200px;
+    height: 150px;    
+}
+
+
+/*Menuc css*/
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+.sidebar-nav {
+  padding: 9px 0;
+}
+
+.dropdown-menu .sub-menu {
+  left: 100%;
+  position: absolute;
+  top: 0;
+  visibility: hidden;
+  margin-top: -1px;
+}
+
+.dropdown-menu li:hover .sub-menu {
+  visibility: visible;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.nav-tabs .dropdown-menu,
+.nav-pills .dropdown-menu,
+.navbar .dropdown-menu {
+  margin-top: 0;
+}
+
+.navbar .sub-menu:before {
+  border-bottom: 7px solid transparent;
+  border-left: none;
+  border-right: 7px solid rgba(0, 0, 0, 0.2);
+  border-top: 7px solid transparent;
+  left: -7px;
+  top: 10px;
+}
+
+.navbar .sub-menu:after {
+  border-top: 6px solid transparent;
+  border-left: none;
+  border-right: 6px solid #fff;
+  border-bottom: 6px solid transparent;
+  left: 10px;
+  top: 11px;
+  left: -6px;
+}
+
+.nav > li > a:hover, .nav > li > a:focus{
+	background-color:none !important;
+	border-bottom:6px solid darkgray;
+	
+}
+.nav-pills > li > a{
+	border-radius:0px !important;
+}
+
+body { 
+padding: 2rem; 
+}
+.tab-content { 
+margin-top: 1.5rem; 
+}
+.nav-pills > .active > a, .nav-pills > .active > a:hover, .nav-pills > .active > a:focus{
+	background-color: #dddd !important;
+    color: #fds2r2 !important;
+}
+.nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover{
+    border-bottom: 4px solid #0088cc;
+}
+
+.nav-tabs > li, .nav-pills > li{
+	float: right;
+}

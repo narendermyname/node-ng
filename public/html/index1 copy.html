@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery UI Tabs - Open on mouseover</title>
+      <link rel="stylesheet" type="text/css" href="/assets/styles/salesforce-lightning-design-system.css">
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <script>
+  $(function() {
+    $( "#tabs" ).tabs({
+      event: "mouseover"
+    });
+  });
+  </script>
+<script>
+         $(function() {
+            $( "#selectable-7" ).selectable({
+               selected: function() {
+                  var result = $( "#result" ).empty();
+                  $( ".ui-selected", this ).each(function() {
+			console.log(this);
+                     var index = $( "#selectable-7 li" ).index( this );
+                     $( this ).toggleClass("cc");
+                     var $this = $(this);
+                    result.append($this.text());
+                  });
+               }
+            });
+	$('#selectable-7 li').click(function(){
+    		//var $this = $(this);
+		//$( this ).toggleClass("cc");
+	});
+	$("#lookup").keyup(function(){
+	if($("input").val() == ""){
+		$(".slds-lookup__menu").css("display","none");
+        
+    }else{
+    	var str = '<div class="slds-lookup__item "><button class="slds-button">'
+    	+'<svg aria-hidden="true" class="slds-icon slds-icon-text-default slds-icon--small">'+
+    	'<use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#user"></use>'+
+        '</svg>&quot;'+$("input").val()+'&quot; in Accounts</button></div>'
+    	$("#appendItems").html(str);
+    	$(".slds-lookup__menu").css("display","block");
+        
+    }
+    });
+    
+    
+         });
+         
+      </script>
+
+<style>
+         #selectable-7 .ui-selecting {/* background: #707070 ;*/}
+         #selectable-7 .ui-selected { /*background: #EEEEEE; color: #000000;*/}
+         #selectable-7 { list-style-type: none; margin: 0; 
+            padding: 0; width: 20%; }
+         #selectable-7 li { margin: 3px; padding: 0.4em; 
+            font-size: 16px;}
+         .ui-widget-content {
+            /*background: #cedc98;
+            border: 1px solid #DDDDDD;
+            color: #333333;*/
+		border: none;
+         }
+         .resultarea {
+            background: #cedc98;
+            border-top: 1px solid #000000;
+            border-bottom: 1px solid #000000;
+            color: #333333;
+            font-size:14px;
+         }
+         .ui-widget-header{
+         	background:none;
+         	border:none;
+         }
+         .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active{
+          	background:none;
+          	border:none;
+         }
+         .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{
+         	background:none;
+          	border:none;
+         }
+.cc{
+background: #cedc98;
+}
+      </style>
+</head>
+<body>
+ <div class="slds-lookup" data-select="multi" data-scope="single" data-typeahead="true" style = "width:30% ;margin-left:5px">
+  <div class="slds-form-element">
+    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon--left">
+      <svg aria-hidden="true" class="slds-input__icon">
+        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#search"></use>
+      </svg>
+      <input id="lookup" class="slds-input" type="text" aria-autocomplete="list" role="combobox" aria-expanded="true" aria-activedescendant="" />
+    </div>
+  </div>
+  <div class="slds-lookup__menu" role="listbox" style = "display:none">
+    <span id = "appendItems"></span>
+    <ul class="slds-lookup__list" role="presentation">
+      <li class="slds-lookup__item">
+        <a id="s01" href="#" role="option">
+          <svg aria-hidden="true" class="slds-icon slds-icon-standard-account slds-icon--small">
+            <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+          </svg>Paddy&#x27;s Pub</a>
+      </li>
+      <li class="slds-lookup__item">
+        <a id="s02" href="#" role="option">
+          <svg aria-hidden="true" class="slds-icon slds-icon-standard-account slds-icon--small">
+            <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+          </svg>Tyrell Corporation</a>
+      </li>
+      <li class="slds-lookup__item">
+        <a id="s03" href="#" role="option">
+          <svg aria-hidden="true" class="slds-icon slds-icon-standard-account slds-icon--small">
+            <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+          </svg>Paper St. Soap Company</a>
+      </li>
+      <li class="slds-lookup__item">
+        <a id="s04" href="#" role="option">
+          <svg aria-hidden="true" class="slds-icon slds-icon-standard-account slds-icon--small">
+            <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+          </svg>Nakatomi Investments</a>
+      </li>
+      <li class="slds-lookup__item">
+        <a id="s05" href="#" role="option">
+          <svg aria-hidden="true" class="slds-icon slds-icon-standard-account slds-icon--small">
+            <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+          </svg>Acme Landscaping</a>
+      </li>
+      <li class="slds-lookup__item">
+        <a id="s06" href="#" role="option">
+          <svg aria-hidden="true" class="slds-icon slds-icon-standard-account slds-icon--small">
+            <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+          </svg>ACME Construction</a>
+      </li>
+    </ul>
+    <div class="slds-lookup__item">
+      <button class="slds-button">
+        <svg aria-hidden="true" class="slds-icon slds-icon-text-default slds-icon--small">
+          <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#add"></use>
+        </svg>Add Account</button>
+    </div>
+  </div>
+<div id="tabs">
+  <ul>
+  	<li><a href="#tabs-3">REFERENCEABILITY</a></li>
+  	<li><a href="#tabs-3">GEOGRAPHY</a></li>
+  	<li><a href="#tabs-3">INDUSTRY</a></li>
+  	<li><a href="#tabs-3">SOLUTION</a></li>
+  	<li><a href="#tabs-3">CONTENT LANGUAGE</a></li>
+  	<li><a href="#tabs-3">CONTENT TYPE</a></li>
+    <li><a href="#tabs-1">PRODUCT</a></li>
+    <li><a href="#tabs-2">MORE <span id = 'moreItems'></span></a></li>
+  </ul>
+  <div id="tabs-1">
+      <ol id="selectable-7">
+         <li class="ui-widget-content">Product 1</li>
+         <li class="ui-widget-content">Product 2</li>
+         <li class="ui-widget-content">Product 3</li>
+         <li class="ui-widget-content">Product 4</li>
+         <li class="ui-widget-content">Product 5</li>
+         <li class="ui-widget-content">Product 6</li>
+         <li class="ui-widget-content">Product 7</li>
+      </ol>
+      <span class="resultarea">Selected Product</span> >> <span id=result class="resultarea"></span>
+  </div>
+  <div id="tabs-2">
+  2
+  </div>
+  <div id="tabs-3">
+  3
+  </div>
+</div>
+ 
+ 
+</div>
+</body>
+</html>

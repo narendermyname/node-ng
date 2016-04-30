@@ -1,0 +1,90 @@
+<apex:page Controller="PagingController"  tabStyle="account">
+    <script type='text/javascript'>
+    function noenter(ev)  {
+        if (window.event && window.event.keyCode == 13 || ev.which == 13) {
+            var inputText=document.getElementById('searchText').value;
+            searchFunction(inputText);
+            return false;
+        } else {
+            return true;
+        }
+    }
+    j$ = jQuery.noConflict();
+    j$(document).ready(function() {
+        j$("#searchText").keydown(function() { 
+            PagingController.searchAccountS(j$('#searchText').val(),handleContactCreate);
+        });
+    });
+    function handleContactCreate(result,event) {
+        alert(result);
+    }
+    </script>
+    <!-- Base styles -->
+    <apex:stylesheet value="{!URLFOR($Resource.SLDS0101, 'assets\\styles\\salesforce-lightning-design-system.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.SLDS0101, 'assets\\styles\\salesforce-lightning-design-system.min.css')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.SLDS0101, 'assets\\styles\\salesforce-lightning-design-system-vf.css')}" />
+    <apex:pageBlock >
+        <apex:form >
+            <div class="slds-lookup slds-has-selection"  data-select="multi" data-scope="single" data-typeahead="true">
+                <div class="slds-form-element">
+                    <div style = "width:30%" class="slds-form-element__control slds-input-has-icon slds-input-has-icon--left">
+                        <c:svg styleClass="slds-input__icon" path="/assets/icons/utility-sprite/svg/symbols.svg#search" />
+                        <input onkeypress = "return noenter(event)" id="searchText" value="" class="slds-input" type="text" aria-autocomplete="list" role="combobox" aria-expanded="false" aria-activedescendant="" />
+                        <!-- <apex:inputText value="{!searchText}" id="searchText" maxlength="80" size="40" /><br/> -->
+                    </div>
+                    <div class="slds-pill-container">
+                        <span class="slds-pill">
+                            <a href="#" class="slds-pill__label">
+                                
+                                <c:svg styleClass="slds-icon slds-icon-standard-account slds-icon--small" path="/assets/icons/standard-sprite/svg/symbols.svg#account" />
+                                Pied Piper</a>
+                            <button class="slds-button slds-button--icon-bare">
+                                <c:svg styleClass="slds-button__icon" path="/assets/icons/utility-sprite/svg/symbols.svg#close" />
+                                <span class="slds-assistive-text">Remove</span>
+                            </button>
+                        </span>
+                        <span class="slds-pill">
+                            <a href="#" class="slds-pill__label">
+                                
+                                <c:svg styleClass="slds-icon slds-icon-standard-account slds-icon--small" path="/assets/icons/standard-sprite/svg/symbols.svg#account" />
+                                HDFSSS FFFS</a>
+                            <button class="slds-button slds-button--icon-bare">
+                                <c:svg styleClass="slds-button__icon" path="/assets/icons/utility-sprite/svg/symbols.svg#close" />
+                                <span class="slds-assistive-text">Remove</span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <apex:actionFunction action="{!searchAccount}" name="searchFunction" reRender="searchResults">
+                <apex:param name="searchText" assignTo="{!searchText}" value=""/>
+            </apex:actionFunction>
+            <apex:outputPanel id="searchResults">
+                <apex:pageBlock rendered="{!accounts.size > 0}">
+                    <apex:pageBlockSection title="Account Results -  Page #{!pageNumber} and Records #{!records} of #{!totalRecords}"  columns="1">
+                        <apex:pageBlockTable value="{!accounts}" var="a">
+                            <apex:column value="{!a.name}"/>
+                            <apex:column value="{!a.type}"/>
+                            <apex:column value="{!a.phone}"/>
+                        </apex:pageBlockTable>
+                    </apex:pageBlockSection>
+                    <apex:panelGrid columns="4">
+                        <apex:commandLink action="{!first}">First</apex:commandlink>
+                        <apex:commandLink action="{!previous}" rendered="{!hasPrevious}">Previous</apex:commandlink>
+                        <apex:commandLink action="{!next}" rendered="{!hasNext}">Next</apex:commandlink>
+                        <apex:commandLink action="{!last}">Last</apex:commandlink>
+                    </apex:panelGrid>  
+                </apex:pageBlock>
+            </apex:outputPanel>
+        </apex:form>
+    </apex:pageBlock>
+    <style>
+        .statusStyle {
+        background:url(/img/loading.gif) no-repeat 0 0; 
+        padding-left:20px; 
+        margin-left:10px; 
+        padding-bottom:5px; 
+        }
+    </style>
+    <apex:includeScript value="{!$Resource.jquery}"/>
+</apex:page>
